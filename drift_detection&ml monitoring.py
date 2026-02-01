@@ -15,9 +15,9 @@ reference_df = pd.read_csv("reference_data.csv")
 
 features = ["Pclass", "Sex", "Age", "Fare", "Embarked"]
 
-st.title("🚢 Titanic ML Monitoring & Drift Detection")
+st.title(" Titanic ML Monitoring & Drift Detection")
 
-# ---------------- USER INPUT ----------------
+#USER INPUT 
 st.sidebar.header("Passenger Input")
 
 pclass = st.sidebar.selectbox("Pclass", [1, 2, 3])
@@ -35,16 +35,16 @@ input_data = pd.DataFrame([{
     "Embarked": encoders["embarked"].transform([embarked])[0]
 }])
 
-# ---------------- PREDICTION ----------------
+#  PREDICTION 
 prediction = model.predict(input_data)[0]
 prob = model.predict_proba(input_data)[0][1]
 
-st.subheader("🎯 Prediction Result")
+st.subheader(" Prediction Result")
 st.write("Survived" if prediction == 1 else "Not Survived")
 st.write(f"Survival Probability: {prob:.2f}")
 
-# ---------------- DRIFT DETECTION ----------------
-st.subheader("📊 Feature Drift Detection (KS Test)")
+#  DRIFT DETECTION 
+st.subheader(" Feature Drift Detection (KS Test)")
 
 drift_results = []
 
@@ -65,8 +65,8 @@ for col in features:
 drift_df = pd.DataFrame(drift_results)
 st.dataframe(drift_df)
 
-# ---------------- VISUALIZATION ----------------
-st.subheader("📈 Feature Distribution Monitoring")
+#  VISUALIZATION 
+st.subheader(" Feature Distribution Monitoring")
 
 selected_feature = st.selectbox("Select feature", features)
 
@@ -75,5 +75,6 @@ ax.hist(reference_df[selected_feature], bins=30, alpha=0.6, label="Reference")
 ax.axvline(input_data[selected_feature].values[0], color="red", label="Current")
 ax.legend()
 st.pyplot(fig)
+
 
 
