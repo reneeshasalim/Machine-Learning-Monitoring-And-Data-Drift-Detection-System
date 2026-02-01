@@ -47,7 +47,8 @@ with open("encoders.pkl", "wb") as f:
 # Save reference data for drift
 X_train.to_csv("reference_data.csv", index=False)
 
-print("✅ Model, encoders & reference data saved")
+print(" Model, encoders & reference data saved")
+
 
 
 
